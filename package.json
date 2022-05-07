@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "lunr": "^2.3.9",
+    "lunr-languages": "^1.9.0",
+    "node-html-parser": "^5.3.3",
+    "nodejieba": "^2.6.0"
+  }
+}
