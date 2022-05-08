@@ -13,6 +13,7 @@ const USER_HOME = process.env.HOME || process.env.USERPROFILE
 var filePath = path.resolve(USER_HOME + '/public_html');
 
 let documents = []
+let documentsMap = new Map();
 
 function fileDisplay(filePath){
     //根据文件路径读取文件，返回文件列表
@@ -30,11 +31,11 @@ function fileDisplay(filePath){
                          var root = HTMLParser.parse(data);
                          if (root.querySelector('title')) {
                                 var document = {}
-                                document.id = index;
+                                document.id = filename;
                                 document.title = root.querySelector('title').text; 
                                 document.body = root.querySelector('body').text; 
-                                index++;
                                 documents.push(document);
+                                documentsMap.set(filename, document);
                             }
                   });
 }
@@ -54,4 +55,16 @@ var idx = lunr(function () {
                                      }, this)
                })
 
-stdout.write(JSON.stringify(idx))
+
+fs.writeFile('./index.json', JSON.stringify(idx), err => {
+  if (err) {
+    console.error(err);
+  }
+});
+
+fs.writeFile('./content-map.json', JSON.stringify(Object.fromEntries(documentsMap)), err => {
+  if (err) {
+    console.error(err);
+  }
+});
+

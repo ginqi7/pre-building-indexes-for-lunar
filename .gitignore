@@ -2,3 +2,4 @@ node_modules/
 .DS_Store
 index.json
 package-lock.json
+content-map.json
