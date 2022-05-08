@@ -9,7 +9,8 @@ var HTMLParser = require('node-html-parser');
 
 var fs = require('fs');
 var path = require('path');//解析需要遍历的文件夹
-var filePath = path.resolve('/Users/a77/public_html');
+const USER_HOME = process.env.HOME || process.env.USERPROFILE
+var filePath = path.resolve(USER_HOME + '/public_html');
 
 let documents = []
 
